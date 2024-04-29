@@ -147,7 +147,7 @@ if(CUDA_MEMTEST_BACKEND STREQUAL "cuda")
 else()
     target_link_libraries(cuda_memtest PRIVATE hip::host)
     target_link_libraries(cuda_memtest PRIVATE hip::device)
-    target_compile_definitions(cuda_memtest PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:-D__HIP_PLATFORM_AMD__>")
+    target_compile_definitions(cuda_memtest PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:__HIP_PLATFORM_AMD__>")
     target_compile_definitions(cuda_memtest PRIVATE "ENABLE_NVML=0")
 endif()
 
@@ -175,7 +175,7 @@ endif()
 
 option(CUDA_MEMTEST_RELEASE "disable all runtime asserts" ON)
 if(CUDA_MEMTEST_RELEASE)
-    target_compile_definitions(cuda_memtest PRIVATE -DNDEBUG)
+    target_compile_definitions(cuda_memtest PRIVATE NDEBUG)
 endif(CUDA_MEMTEST_RELEASE)
 
 ################################################################################
