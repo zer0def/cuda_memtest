@@ -385,6 +385,16 @@ main(const int argc, const char **argv)
     }
     
     rc = clBuildProgram(programs[i], 0, NULL, NULL, NULL, NULL); CLERR;
+/*
+    if (rc == -11) {  // CL_BUILD_PROGRAM_FAILURE
+      size_t log_size;
+      clGetProgramBuildInfo(programs[i], devices[i], CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
+      char *log = (char*)malloc(log_size);
+      clGetProgramBuildInfo(programs[i], devices[i], CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
+      printf("%s\n", log);
+      return 1;
+    }
+*/
   }
     
   
